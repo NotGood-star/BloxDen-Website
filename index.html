@@ -3,15 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloxDen Bot</title>
+<title>BloxDen Dashboard</title>
 
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0b0c10;
+  font-family: Arial, sans-serif;
+  background: #0a0b10;
   color: white;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+/* PARTICLES */
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #5865F2;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
 }
 
 /* NAV */
@@ -19,7 +36,8 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 15px 30px;
-  background: #111218;
+  background: rgba(20,20,30,0.6);
+  backdrop-filter: blur(10px);
 }
 
 .logo {
@@ -30,25 +48,39 @@ nav {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 90px 20px;
+  padding: 70px 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero img {
   width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 2px solid #5865F2;
-  box-shadow: 0 0 20px rgba(88,101,242,0.5);
+  box-shadow: 0 0 30px rgba(88,101,242,0.6);
 }
 
 .hero h1 {
-  font-size: 45px;
-  margin: 15px 0;
+  font-size: 48px;
+  margin: 10px 0;
 }
 
 .hero p {
   color: #aaa;
   max-width: 600px;
   margin: auto;
+}
+
+/* STATUS */
+.status {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(0,255,120,0.1);
+  color: #4ade80;
+  font-size: 14px;
 }
 
 /* BUTTON */
@@ -59,48 +91,46 @@ nav {
   background: #5865F2;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
-}
-
-/* STATUS */
-.status {
-  margin-top: 15px;
-  color: #4ade80;
-  font-size: 14px;
-}
-
-/* FEATURES */
-.section {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.card {
-  background: #16171c;
-  padding: 18px;
-  width: 220px;
   border-radius: 10px;
   transition: 0.3s;
 }
 
+.btn:hover {
+  transform: translateY(-3px);
+  background: #4752c4;
+}
+
+/* CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
 .card:hover {
-  transform: translateY(-5px);
-  border: 1px solid #5865F2;
+  transform: translateY(-6px);
+  border-color: #5865F2;
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 20px;
-  background: #111218;
+  padding: 15px;
+  background: rgba(0,0,0,0.3);
   color: #777;
+  font-size: 13px;
 }
 </style>
 </head>
@@ -108,7 +138,7 @@ footer {
 <body>
 
 <nav>
-  <div class="logo">BloxDen</div>
+  <div class="logo">BloxDen Dashboard</div>
   <div>
     <a href="terms.html" style="color:white; margin-right:15px;">Terms</a>
     <a href="privacy.html" style="color:white;">Privacy</a>
@@ -121,7 +151,7 @@ footer {
 
   <h1>BloxDen Bot</h1>
 
-  <p>Advanced Discord bot for moderation, fun, economy and Roblox tools.</p>
+  <p>Ultimate Discord bot for moderation, fun, economy and Roblox systems.</p>
 
   <div class="status" id="status">● Online</div>
 
@@ -135,37 +165,37 @@ footer {
 
 </div>
 
-<div class="section">
-  <h2>Features</h2>
-
-  <div class="cards">
-    <div class="card">Moderation System</div>
-    <div class="card">Fun Commands</div>
-    <div class="card">Economy System</div>
-    <div class="card">Roblox Tools</div>
-    <div class="card">Auto Role System</div>
-    <div class="card">24/7 Ready</div>
-  </div>
+<div class="grid">
+  <div class="card">⚡ Latency<br><b>38ms</b></div>
+  <div class="card">💬 Commands<br><b>150+</b></div>
+  <div class="card">🛡️ Protection<br><b>Active</b></div>
+  <div class="card">📊 Uptime<br><b>99.9%</b></div>
+  <div class="card">🎮 Games<br><b>Enabled</b></div>
+  <div class="card">🤖 AI Tools<br><b>Ready</b></div>
 </div>
 
 <footer>
-  © 2026 BloxDen Bot
+  © 2026 BloxDen • Final Boss Mode Activated
 </footer>
 
 <script>
-// 🔥 SIMPLE LIVE EFFECTS
 
-// blinking status
+/* PARTICLES */
+for (let i = 0; i < 50; i++) {
+  let p = document.createElement("div");
+  p.className = "particle";
+  p.style.left = Math.random() * window.innerWidth + "px";
+  p.style.top = Math.random() * window.innerHeight + "px";
+  p.style.animationDuration = (3 + Math.random() * 5) + "s";
+  document.body.appendChild(p);
+}
+
+/* STATUS BLINK */
 setInterval(() => {
   const s = document.getElementById("status");
   s.style.opacity = s.style.opacity === "0.5" ? "1" : "0.5";
-}, 800);
+}, 600);
 
-// smooth background movement effect
-document.addEventListener("mousemove", (e) => {
-  document.body.style.backgroundPosition =
-    `${e.clientX / 50}px ${e.clientY / 50}px`;
-});
 </script>
 
 </body>
