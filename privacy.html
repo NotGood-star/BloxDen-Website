@@ -1,32 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>BloxDen Privacy</title>
-  <style>
-    body { font-family: Arial; background:#0f0f0f; color:white; padding:20px; }
-    h1 { color:#5865F2; }
-    a { color:#58a6ff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloxDen - Privacy Policy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Inter',sans-serif;
+background:#0f0f1a;
+color:white;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(15,15,26,.9);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.logo span{
+color:#a855f7;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+.hero{
+padding:100px 8%;
+text-align:center;
+background:
+radial-gradient(circle at top left,#8b5cf655 0%,transparent 40%),
+radial-gradient(circle at bottom right,#7c3aed44 0%,transparent 40%);
+}
+
+.hero h1{
+font-size:56px;
+margin-bottom:15px;
+}
+
+.hero p{
+color:#c9c9d6;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:50px 20px;
+}
+
+.card{
+background:#181827;
+border:1px solid #ffffff10;
+border-radius:20px;
+padding:30px;
+margin-bottom:25px;
+}
+
+.card h2{
+margin-bottom:15px;
+color:#a855f7;
+}
+
+.card ul{
+padding-left:20px;
+line-height:2;
+color:#d1d5db;
+}
+
+.card p{
+color:#d1d5db;
+line-height:1.8;
+}
+
+footer{
+text-align:center;
+padding:30px;
+border-top:1px solid #ffffff10;
+color:#9ca3af;
+}
+</style>
 </head>
+
 <body>
 
-<h1>🔐 Privacy Policy</h1>
+<nav>
+<div class="logo">Blox<span>Den</span></div>
 
-<p>BloxDen Bot may collect:</p>
+<div>
+<a href="index.html">Home</a>
+<a href="terms.html">Terms</a>
+</div>
+</nav>
 
+<section class="hero">
+<h1>Privacy Policy</h1>
+<p>Effective Date: June 2026</p>
+</section>
+
+<div class="container">
+
+<div class="card">
+<h2>Information We Store</h2>
 <ul>
-  <li>User IDs</li>
-  <li>Server IDs</li>
-  <li>Command usage data</li>
+<li>Discord User IDs</li>
+<li>Discord Server IDs</li>
+<li>Economy Data</li>
+<li>Configuration Settings</li>
 </ul>
+</div>
 
-<p>This data is only used for bot functionality and is NOT sold or shared.</p>
+<div class="card">
+<h2>Information We Do Not Store</h2>
+<ul>
+<li>Passwords</li>
+<li>Payment Information</li>
+<li>Private Messages</li>
+<li>Personal Files</li>
+</ul>
+</div>
 
-<p>You can request data deletion by contacting the developer.</p>
+<div class="card">
+<h2>How Data Is Used</h2>
+<p>
+Stored data is used solely to provide bot functionality such as moderation,
+economy systems, settings storage, and feature operation.
+</p>
+</div>
 
-<br>
+<div class="card">
+<h2>Data Removal</h2>
+<p>
+Server owners may request removal of bot-related server data by contacting
+the BloxDen support team.
+</p>
+</div>
 
-<a href="index.html">⬅ Back to Home</a>
+<div class="card">
+<h2>Policy Updates</h2>
+<p>
+This Privacy Policy may be updated periodically. Continued use of BloxDen
+constitutes acceptance of any revisions.
+</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 BloxDen Bot
+</footer>
 
 </body>
 </html>
