@@ -1,209 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloxDen Bot</title>
 
-<title>BloxDen Dashboard | Devil Mode</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #070611;
+    color: white;
+    text-align: center;
+}
 
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+/* HEADER */
+.header {
+    padding: 70px 20px;
+    background: linear-gradient(135deg, #6a00ff, #2b0a4a);
+}
+
+.header img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 25px #7a2cff;
+}
+
+h1 {
+    font-size: 45px;
+    margin: 15px 0 5px;
+}
+
+p {
+    color: #ccc;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.invite {
+    background: #7a2cff;
+    color: white;
+}
+
+.support {
+    background: transparent;
+    border: 1px solid #7a2cff;
+    color: white;
+}
+
+.invite:hover, .support:hover {
+    transform: scale(1.05);
+}
+
+/* SECTION */
+.section {
+    padding: 50px 20px;
+}
+
+.card {
+    background: #15122a;
+    max-width: 700px;
+    margin: 15px auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #2a1f55;
+}
+</style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-    <div class="spinner"></div>
-    <h2>BloxDen Dashboard Loading...</h2>
-</div>
+<div class="header">
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+    <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096">
 
-    <div class="brand">
-        🤖 BloxDen
-    </div>
+    <h1>BloxDen</h1>
+    <p>Powerful Discord Bot for Moderation, Economy & Fun</p>
 
-    <a href="#dashboard">📊 Dashboard</a>
-    <a href="#stats">📡 Live Stats</a>
-    <a href="#features">⚡ Features</a>
-    <a href="#commands">🧩 Commands</a>
-    <a href="#ai">🧠 AI Panel</a>
-    <a href="#terms">📜 Terms</a>
-    <a href="#privacy">🔒 Privacy</a>
+    <div>
+        <a class="btn invite" href="https://discord.com/oauth2/authorize?client_id=1507972003481784421" target="_blank">
+            🚀 Invite Bot
+        </a>
 
-    <div class="sidebar-btns">
-        <a class="invite"
-        href="https://discord.com/oauth2/authorize?client_id=1507972003481784421"
-        target="_blank">Invite</a>
-
-        <a class="support"
-        href="https://discord.gg/RzMyxZMck"
-        target="_blank">Support</a>
+        <a class="btn support" href="https://discord.gg/KCFzhHfGYN" target="_blank">
+            💬 Support Server
+        </a>
     </div>
 
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main">
+<div class="section">
 
-<!-- HEADER -->
-<header class="topbar">
-
-    <h1>⚡ BloxDen Control Panel</h1>
-
-    <div class="status">
-        🟢 Online
+    <div class="card">
+        <h2>🤖 About Bot</h2>
+        <p>
+            A powerful all-in-one Discord bot built for moderation, economy, fun, and utility systems.
+        </p>
     </div>
 
-</header>
-
-<!-- DASHBOARD HERO -->
-<section class="panel" id="dashboard">
-
-    <div class="glass hero-box">
-
-        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096">
-
-        <div>
-            <h2>Welcome to BloxDen Dashboard</h2>
-            <p>Manage AI, Moderation, Economy, Tickets & more from one place.</p>
-        </div>
-
+    <div class="card">
+        <h2>⚡ Features</h2>
+        <p>
+            Moderation • Economy • Games • XP • Giveaways • Utility Tools • Security
+        </p>
     </div>
 
-</section>
-
-<!-- STATS -->
-<section class="panel" id="stats">
-
-<h2>📡 Live Stats</h2>
-
-<div class="grid">
-
-<div class="glass stat">
-<h3 id="servers">0</h3>
-<p>Servers</p>
-</div>
-
-<div class="glass stat">
-<h3 id="users">0</h3>
-<p>Users</p>
-</div>
-
-<div class="glass stat">
-<h3>50+</h3>
-<p>Commands</p>
-</div>
-
-<div class="glass stat">
-<h3>AI</h3>
-<p>Powered</p>
-</div>
+    <div class="card">
+        <h2>📊 Dashboard</h2>
+        <p>Manage your bot settings and server tools</p>
+        <a class="btn invite" href="dashboard.html">Open Dashboard</a>
+    </div>
 
 </div>
-
-</section>
-
-<!-- FEATURES -->
-<section class="panel" id="features">
-
-<h2>⚡ Systems</h2>
-
-<div class="grid">
-
-<div class="glass card">🛡 Moderation System</div>
-<div class="glass card">💰 Economy System</div>
-<div class="glass card">🤖 AI Gemini Engine</div>
-<div class="glass card">🎫 Ticket System</div>
-<div class="glass card">📈 Leveling System</div>
-<div class="glass card">🎉 Fun System</div>
-
-</div>
-
-</section>
-
-<!-- COMMANDS -->
-<section class="panel" id="commands">
-
-<h2>🧩 Commands</h2>
-
-<div class="grid small">
-
-<div class="glass cmd">/ai</div>
-<div class="glass cmd">/avatar</div>
-<div class="glass cmd">/userinfo</div>
-<div class="glass cmd">/serverinfo</div>
-<div class="glass cmd">/ban</div>
-<div class="glass cmd">/kick</div>
-<div class="glass cmd">/daily</div>
-<div class="glass cmd">/work</div>
-<div class="glass cmd">/beg</div>
-<div class="glass cmd">/crime</div>
-<div class="glass cmd">/rob</div>
-<div class="glass cmd">/gamble</div>
-
-</div>
-
-</section>
-
-<!-- AI PANEL -->
-<section class="panel" id="ai">
-
-<h2>🧠 AI Control Panel</h2>
-
-<div class="glass ai-box">
-
-<p><b>User:</b> How do I grow my Discord server?</p>
-
-<p><b>BloxDen AI:</b> Build engagement, host events, use moderation, and keep members active daily.</p>
-
-</div>
-
-</section>
-
-<!-- TERMS -->
-<section class="panel" id="terms">
-
-<h2>📜 Terms</h2>
-
-<div class="glass text-box">
-
-<p>
-You agree not to abuse BloxDen systems. Misuse may result in restrictions or bans.
-</p>
-
-</div>
-
-</section>
-
-<!-- PRIVACY -->
-<section class="panel" id="privacy">
-
-<h2>🔒 Privacy</h2>
-
-<div class="glass text-box">
-
-<p>
-We only store required data (user IDs, economy, levels). We do NOT sell data.
-</p>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-<footer>
-
-<p>© 2026 BloxDen • Devil Dashboard Mode</p>
-
-</footer>
-
-</div>
-
-<script src="script.js"></script>
 
 </body>
 </html>
