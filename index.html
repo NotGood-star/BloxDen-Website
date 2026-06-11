@@ -1,412 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloxDen Bot</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:#0f0f1a;
-    color:white;
-}
-
-/* NAVBAR */
-
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    backdrop-filter:blur(10px);
-    background:rgba(15,15,26,.75);
-}
-
-.logo{
-    font-size:28px;
-    font-weight:800;
-    color:#ffffff;
-}
-
-.logo span{
-    color:#9f7aea;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    opacity:.85;
-}
-
-.nav-links a:hover{
-    opacity:1;
-}
-
-/* HERO */
-
-.hero{
-    min-height:90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0 8%;
-    background:
-    radial-gradient(circle at top left,#8b5cf655 0%,transparent 40%),
-    radial-gradient(circle at bottom right,#7c3aed44 0%,transparent 40%);
-}
-
-.hero-content{
-    flex:1;
-}
-
-.hero-content h1{
-    font-size:64px;
-    line-height:1.1;
-    margin-bottom:20px;
-}
-
-.hero-content h1 span{
-    color:#a855f7;
-}
-
-.hero-content p{
-    color:#c9c9d6;
-    max-width:600px;
-    font-size:18px;
-    line-height:1.7;
-}
-
-.buttons{
-    margin-top:35px;
-}
-
-.btn{
-    display:inline-block;
-    text-decoration:none;
-    padding:14px 26px;
-    border-radius:12px;
-    font-weight:700;
-    transition:.3s;
-}
-
-.btn-primary{
-    background:linear-gradient(135deg,#a855f7,#7c3aed);
-    color:white;
-}
-
-.btn-primary:hover{
-    transform:translateY(-3px);
-}
-
-.btn-secondary{
-    border:1px solid #ffffff33;
-    color:white;
-    margin-left:12px;
-}
-
-.hero-image{
-    flex:1;
-    text-align:center;
-}
-
-.hero-image img{
-    width:280px;
-    border-radius:50%;
-    border:4px solid #8b5cf6;
-    box-shadow:0 0 60px rgba(168,85,247,.4);
-}
-
-/* STATS */
-
-.stats{
-    padding:70px 8%;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.stat-card{
-    background:#181827;
-    border:1px solid #ffffff10;
-    border-radius:18px;
-    padding:25px;
-    text-align:center;
-}
-
-.stat-card h3{
-    font-size:32px;
-    color:#a855f7;
-}
-
-/* FEATURES */
-
-.features{
-    padding:90px 8%;
-}
-
-.section-title{
-    text-align:center;
-    font-size:42px;
-    margin-bottom:50px;
-}
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-}
-
-.feature{
-    background:#181827;
-    border-radius:20px;
-    padding:30px;
-    border:1px solid #ffffff10;
-}
-
-.feature h3{
-    margin-bottom:12px;
-}
-
-.feature p{
-    color:#bdbdcf;
-    line-height:1.6;
-}
-
-/* CTA */
-
-.cta{
-    padding:100px 8%;
-    text-align:center;
-}
-
-.cta-box{
-    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
-    border-radius:30px;
-    padding:60px;
-}
-
-.cta h2{
-    font-size:42px;
-    margin-bottom:15px;
-}
-
-.cta p{
-    margin-bottom:25px;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:35px;
-    border-top:1px solid #ffffff10;
-    color:#9ca3af;
-}
-
-footer a{
-    color:#a855f7;
-    text-decoration:none;
-    margin:0 10px;
-}
-
-@media(max-width:900px){
-
-.hero{
-    flex-direction:column-reverse;
-    text-align:center;
-    padding-top:60px;
-}
-
-.hero-content h1{
-    font-size:44px;
-}
-
-.hero-image img{
-    width:200px;
-    margin-bottom:40px;
-}
-
-.nav-links{
-    display:none;
-}
-
-.btn-secondary{
-    display:block;
-    margin:15px auto 0;
-}
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-    <div class="logo">Blox<span>Den</span></div>
-
-    <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
-    </div>
-</nav>
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <h1>
-            The Ultimate
-            <span>Discord Bot</span>
-            for Roblox Communities
-        </h1>
-
-        <p>
-            BloxDen helps you manage your Discord server with moderation,
-            economy, fun features, automation and Roblox-focused tools.
-        </p>
-
-        <div class="buttons">
-
-            <a class="btn btn-primary"
-               href="https://discord.com/api/oauth2/authorize?client_id=1507972003481784421&scope=bot&permissions=8"
-               target="_blank">
-               Invite BloxDen
-            </a>
-
-            <a class="btn btn-secondary"
-               href="#">
-               Support Server
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="hero-image">
-        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.webp?size=4096" alt="BloxDen">
-    </div>
-
-</section>
-
-<section class="stats">
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h3>Growing</h3>
-            <p>Community</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>100+</h3>
-            <p>Commands</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>24/7</h3>
-            <p>Availability</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Active</h3>
-            <p>Development</p>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="features" id="features">
-
-    <h2 class="section-title">Features</h2>
-
-    <div class="feature-grid">
-
-        <div class="feature">
-            <h3>🛡 Moderation</h3>
-            <p>Keep your server safe with powerful moderation tools.</p>
-        </div>
-
-        <div class="feature">
-            <h3>💰 Economy</h3>
-            <p>Interactive economy system with rewards and progression.</p>
-        </div>
-
-        <div class="feature">
-            <h3>🎮 Fun Commands</h3>
-            <p>Games, entertainment and community engagement features.</p>
-        </div>
-
-        <div class="feature">
-            <h3>🤖 Automation</h3>
-            <p>Automatic systems that save moderators time.</p>
-        </div>
-
-        <div class="feature">
-            <h3>🎁 Giveaways</h3>
-            <p>Create and manage giveaways with ease.</p>
-        </div>
-
-        <div class="feature">
-            <h3>🎯 Roblox Tools</h3>
-            <p>Built with Roblox communities in mind.</p>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="cta">
-
-    <div class="cta-box">
-
-        <h2>Ready to power your server?</h2>
-
-        <p>
-            Invite BloxDen and start building a better community today.
-        </p>
-
-        <a class="btn btn-primary"
-           href="https://discord.com/api/oauth2/authorize?client_id=1507972003481784421&scope=bot&permissions=8"
-           target="_blank">
-           Invite Now
+<img class="bot-logo"
+    src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096"
+    alt="BloxDen Bot">
+
+    <h1>BloxDen</h1>
+
+    <h2>The Ultimate All-in-One Discord Bot</h2>
+
+    <p>
+        Manage, grow, and automate your Discord server with
+        powerful moderation, economy, AI, tickets, leveling,
+        giveaways, utility tools, and fun commands.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=1507972003481784421"
+           target="_blank"
+           class="invite-btn">
+           Invite BloxDen
         </a>
 
+        <a href="https://discord.gg/RzMyxZMck"
+           target="_blank"
+           class="support-btn">
+           Support Server
+        </a>
     </div>
 
-</section>
+    <div class="stats">
+        <div class="stat">
+            <h3>50+</h3>
+            <span>Commands</span>
+        </div>
 
-<footer>
+        <div class="stat">
+            <h3>8</h3>
+            <span>Systems</span>
+        </div>
 
-    © 2026 BloxDen Bot
+        <div class="stat">
+            <h3>24/7</h3>
+            <span>Online</span>
+        </div>
 
-    <br><br>
+        <div class="stat">
+            <h3>AI</h3>
+            <span>Powered</span>
+        </div>
+    </div>
 
-    <a href="terms.html">Terms of Service</a>
-    |
-    <a href="privacy.html">Privacy Policy</a>
-
-</footer>
-
-</body>
-</html>
+</div>
