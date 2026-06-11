@@ -1,6 +1,8 @@
-/* =======================
-   GLOBAL
-======================= */
+/* =========================
+   BLOXDEN DEVIL DASHBOARD UI
+   MEE6 + DYNO + CARL STYLE
+========================= */
+
 *{
 margin:0;
 padding:0;
@@ -9,301 +11,251 @@ font-family:'Inter',sans-serif;
 }
 
 body{
-background:#070707;
+background: radial-gradient(circle at top, #0a0a0a, #000);
 color:white;
 overflow-x:hidden;
 }
 
-/* =======================
-   NAVBAR
-======================= */
-.navbar{
+/* ================= LOADER ================= */
+#loader{
 position:fixed;
-top:0;
 width:100%;
+height:100%;
+background:#000;
 display:flex;
-justify-content:space-between;
+flex-direction:column;
+justify-content:center;
 align-items:center;
-padding:15px 5%;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(10px);
-z-index:1000;
+z-index:9999;
 }
 
-.logo{
+.spinner{
+width:60px;
+height:60px;
+border:6px solid #222;
+border-top:6px solid #a855f7;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+height:100%;
+width:240px;
+background:rgba(10,10,10,0.8);
+backdrop-filter:blur(12px);
+border-right:1px solid rgba(255,255,255,0.05);
+display:flex;
+flex-direction:column;
+padding:20px;
+gap:15px;
+}
+
+.brand{
 font-size:20px;
 font-weight:800;
 color:#facc15;
+margin-bottom:20px;
 }
 
-.nav-links{
-display:flex;
-list-style:none;
-gap:20px;
-}
-
-.nav-links a{
-color:white;
+.sidebar a{
+color:#ccc;
 text-decoration:none;
-font-size:14px;
-opacity:0.8;
-transition:0.3s;
-}
-
-.nav-links a:hover{
-opacity:1;
-color:#a855f7;
-}
-
-.nav-btn{
-padding:10px 16px;
-background:#7c3aed;
-color:white;
+padding:10px;
 border-radius:10px;
-text-decoration:none;
+transition:0.3s;
 font-size:14px;
-transition:0.3s;
 }
 
-.nav-btn:hover{
-transform:translateY(-2px);
+.sidebar a:hover{
+background:rgba(124,58,237,0.2);
+color:#a855f7;
+transform:translateX(5px);
 }
 
-/* =======================
-   HERO
-======================= */
-.hero{
-min-height:100vh;
+.sidebar-btns{
+margin-top:auto;
 display:flex;
-align-items:center;
-justify-content:center;
+flex-direction:column;
+gap:10px;
+}
+
+.sidebar-btns a{
 text-align:center;
-padding:120px 20px 60px;
-}
-
-.bot-avatar{
-width:160px;
-border-radius:50%;
-box-shadow:0 0 40px rgba(124,58,237,0.6);
-animation:float 4s ease-in-out infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-12px);}
-100%{transform:translateY(0);}
-}
-
-.hero h1{
-font-size:60px;
-color:#facc15;
-margin-top:10px;
-}
-
-.tagline{
-max-width:700px;
-margin:15px auto;
-color:#cfcfcf;
-font-size:16px;
-}
-
-.buttons{
-margin-top:20px;
-display:flex;
-gap:15px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:12px 20px;
-border-radius:12px;
-text-decoration:none;
+padding:10px;
+border-radius:10px;
 font-weight:600;
-transition:0.3s;
+text-decoration:none;
 }
 
-.primary{
+.sidebar-btns .invite{
 background:#7c3aed;
 color:white;
 }
 
-.secondary{
+.sidebar-btns .support{
 background:#facc15;
 color:black;
 }
 
-.btn:hover{
-transform:translateY(-3px);
+/* ================= MAIN ================= */
+.main{
+margin-left:240px;
+padding:20px;
 }
 
-/* =======================
-   STATS
-======================= */
-.stats{
+/* ================= TOPBAR ================= */
+.topbar{
 display:flex;
-justify-content:center;
-gap:15px;
-margin-top:30px;
-flex-wrap:wrap;
-}
-
-.stat{
-background:#111;
+justify-content:space-between;
+align-items:center;
 padding:15px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.05);
 border-radius:12px;
-min-width:120px;
+backdrop-filter:blur(10px);
 }
 
-.stat h2{
-color:#facc15;
+.status{
+background:rgba(34,197,94,0.15);
+color:#22c55e;
+padding:6px 12px;
+border-radius:10px;
+font-size:14px;
 }
 
-/* =======================
-   SECTIONS
-======================= */
-.section{
-padding:80px 8%;
-text-align:center;
+/* ================= PANELS ================= */
+.panel{
+margin-top:30px;
 }
 
-.title{
-font-size:38px;
-color:#facc15;
-margin-bottom:40px;
+.hero-box{
+display:flex;
+align-items:center;
+gap:20px;
+padding:20px;
+border-radius:15px;
 }
 
-/* =======================
-   GRID CARDS
-======================= */
+.hero-box img{
+width:90px;
+border-radius:50%;
+box-shadow:0 0 30px rgba(124,58,237,0.6);
+}
+
+/* ================= GLASS EFFECT ================= */
+.glass{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+border-radius:15px;
+padding:20px;
+transition:0.3s;
+}
+
+.glass:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(168,85,247,0.3);
+}
+
+/* ================= GRID ================= */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:20px;
 }
 
 .grid.small{
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
 }
 
-.card{
-background:#111;
-padding:20px;
-border-radius:15px;
-border:1px solid #222;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px rgba(168,85,247,0.4);
-}
-
-.card h3{
-color:#a855f7;
-margin-bottom:10px;
-}
-
-/* =======================
-   COMMAND BOX
-======================= */
-.cmd{
-background:#111;
-padding:15px;
-border-radius:12px;
-border:1px solid #222;
-transition:0.3s;
-}
-
-.cmd:hover{
-transform:scale(1.05);
+/* ================= CARDS ================= */
+.card h3,
+.stat h3{
 color:#facc15;
 }
 
-/* =======================
-   AI BOX
-======================= */
+.card{
+text-align:center;
+}
+
+/* ================= COMMAND BOX ================= */
+.cmd{
+text-align:center;
+font-weight:600;
+color:#a855f7;
+cursor:pointer;
+}
+
+/* ================= AI BOX ================= */
 .ai-box{
-max-width:700px;
-margin:auto;
-background:#111;
-padding:25px;
-border-radius:15px;
-border:1px solid #222;
 text-align:left;
 }
 
-/* =======================
-   CTA
-======================= */
-.cta{
-padding:80px 20px;
-text-align:center;
+/* ================= TEXT ================= */
+.text-box{
+text-align:left;
+color:#ccc;
 }
 
-.cta h2{
-margin-bottom:20px;
-}
-
-/* =======================
-   FOOTER
-======================= */
+/* ================= FOOTER ================= */
 footer{
-padding:30px;
-text-align:center;
-background:#050505;
-color:#888;
 margin-top:50px;
+text-align:center;
+padding:20px;
+color:#666;
 }
 
-/* =======================
-   RESPONSIVE (MOBILE)
-======================= */
+/* ================= ANIMATIONS ================= */
+.card, .stat, .cmd{
+opacity:0;
+transform:translateY(20px);
+animation:fadeIn 0.6s forwards;
+}
+
+@keyframes fadeIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ================= MOBILE ================= */
 @media(max-width:768px){
 
-.nav-links{
-display:none;
+.sidebar{
+width:70px;
+padding:10px;
 }
 
-.hero h1{
-font-size:40px;
-}
-
-.tagline{
-font-size:14px;
-padding:0 10px;
-}
-
-.stats{
-gap:10px;
-}
-
-.stat{
-min-width:100px;
+.sidebar a{
+font-size:0;
 padding:12px;
+text-align:center;
 }
 
-.title{
-font-size:28px;
+.sidebar-btns a{
+font-size:0;
 }
 
-.section{
-padding:60px 5%;
-}
-}
-
-@media(max-width:480px){
-
-.hero h1{
-font-size:32px;
+.main{
+margin-left:70px;
 }
 
-.bot-avatar{
-width:120px;
+.topbar h1{
+font-size:16px;
 }
 
-.btn{
-width:100%;
+.hero-box{
+flex-direction:column;
 text-align:center;
 }
 }
