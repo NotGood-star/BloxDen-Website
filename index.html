@@ -1,127 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloxDen Bot</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #070611;
-    color: white;
-    text-align: center;
-}
-
-/* HEADER */
-.header {
-    padding: 70px 20px;
-    background: linear-gradient(135deg, #6a00ff, #2b0a4a);
-}
-
-.header img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 0 25px #7a2cff;
-}
-
-h1 {
-    font-size: 45px;
-    margin: 15px 0 5px;
-}
-
-p {
-    color: #ccc;
-}
-
-/* BUTTONS */
-.btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.invite {
-    background: #7a2cff;
-    color: white;
-}
-
-.support {
-    background: transparent;
-    border: 1px solid #7a2cff;
-    color: white;
-}
-
-.invite:hover, .support:hover {
-    transform: scale(1.05);
-}
-
-/* SECTION */
-.section {
-    padding: 50px 20px;
-}
-
-.card {
-    background: #15122a;
-    max-width: 700px;
-    margin: 15px auto;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #2a1f55;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloxDen | The Ultimate Discord Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-slate-900 text-white font-sans">
 
-<body>
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+        <h1 class="text-2xl font-bold text-blue-500">BloxDen</h1>
+        <div class="space-x-6">
+            <a href="#features" class="hover:text-blue-400">Features</a>
+            <a href="https://discord.gg/NTUj5gKpg" class="hover:text-blue-400">Support</a>
+        </div>
+    </nav>
 
-<div class="header">
-
-    <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096">
-
-    <h1>BloxDen</h1>
-    <p>Powerful Discord Bot for Moderation, Economy & Fun</p>
-
-    <div>
-        <a class="btn invite" href="https://discord.com/oauth2/authorize?client_id=1507972003481784421" target="_blank">
-            🚀 Invite Bot
-        </a>
-
-        <a class="btn support" href="https://discord.gg/KCFzhHfGYN" target="_blank">
-            💬 Support Server
-        </a>
-    </div>
-
-</div>
-
-<div class="section">
-
-    <div class="card">
-        <h2>🤖 About Bot</h2>
-        <p>
-            A powerful all-in-one Discord bot built for moderation, economy, fun, and utility systems.
+    <!-- Hero Section -->
+    <header class="text-center py-20 px-4">
+        <!-- Bot Avatar -->
+        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
+             alt="BloxDen Logo" 
+             class="w-32 h-32 mx-auto rounded-full mb-6 border-4 border-slate-700 shadow-lg shadow-blue-500/20">
+        
+        <h2 class="text-5xl font-extrabold mb-6">Elevate Your Discord Community</h2>
+        <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            Powerful moderation, automation, and Roblox integration all in one place.
         </p>
-    </div>
+        <a href="https://discord.com/oauth2/authorize?client_id=1507972003481784421" 
+           class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105 duration-200">
+            Invite BloxDen
+        </a>
+    </header>
 
-    <div class="card">
-        <h2>⚡ Features</h2>
-        <p>
-            Moderation • Economy • Games • XP • Giveaways • Utility Tools • Security
-        </p>
-    </div>
+    <!-- Features Section -->
+    <section id="features" class="max-w-6xl mx-auto py-20 px-4 grid md:grid-cols-3 gap-8">
+        <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <h3 class="text-xl font-bold mb-4">Smart Moderation</h3>
+            <p class="text-slate-400">Keep your server safe with automated filters and advanced logging tools.</p>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <h3 class="text-xl font-bold mb-4">Roblox Integration</h3>
+            <p class="text-slate-400">Seamlessly link your Roblox community data directly to your Discord server.</p>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <h3 class="text-xl font-bold mb-4">Custom Commands</h3>
+            <p class="text-slate-400">Create personalized commands that fit your community's unique needs.</p>
+        </div>
+    </section>
 
-    <div class="card">
-        <h2>📊 Dashboard</h2>
-        <p>Manage your bot settings and server tools</p>
-        <a class="btn invite" href="dashboard.html">Open Dashboard</a>
-    </div>
-
-</div>
+    <!-- Footer -->
+    <footer class="text-center py-10 border-t border-slate-800">
+        <p class="text-slate-500 mb-4">© 2026 BloxDen. All rights reserved.</p>
+        <div class="space-x-4">
+            <a href="terms.html" class="text-sm text-slate-400 hover:text-white hover:underline">Terms of Service</a>
+            <a href="privacy.html" class="text-sm text-slate-400 hover:text-white hover:underline">Privacy Policy</a>
+        </div>
+    </footer>
 
 </body>
 </html>
