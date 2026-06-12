@@ -7,18 +7,17 @@ const { Strategy: DiscordStrategy } = require('passport-discord');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// 1. Session Setup
+// --- Session & Passport Setup ---
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'super-secret-key',
+    secret: process.env.SESSION_SECRET || 'a-very-random-secret-key',
     resave: false,
     saveUninitialized: false
 }));
 
-// 2. Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// 3. Define Strategy (MUST be before routes)
+// --- Strategy Configuration ---
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
@@ -31,27 +30,37 @@ passport.use(new DiscordStrategy({
     return done(null, profile);
 }));
 
-// 4. Static Files
+// --- Middleware & Static Files ---
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 5. Routes
+// --- Routes ---
+// Public Pages
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'public', 'terms.html')));
 app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, 'public', 'privacy.html')));
 
-// 6. Auth Routes
+// Auth Routes
 app.get('/login', passport.authenticate('discord'));
 app.get('/callback', passport.authenticate('discord', { 
     failureRedirect: '/' 
 }), (req, res) => res.redirect('/dashboard'));
 
+app.get('/logout', (req, res) => {
+    req.logout(() => res.redirect('/'));
+});
+
+// Dashboard & API
 app.get('/dashboard', (req, res) => {
     if (!req.isAuthenticated()) return res.redirect('/login');
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-app.get('/logout', (req, res) => {
-    req.logout(() => res.redirect('/'));
+app.get('/api/servers', (req, res) => {
+    if (!req.isAuthenticated()) return res.status(401).send('Unauthorized');
+    
+    // Filter servers where user has 'MANAGE_GUILD' (bit 0x20)
+    const manageable = req.user.guilds.filter(g => (g.permissions & 0x20) === 0x20);
+    res.json(manageable);
 });
 
 // Start Server
