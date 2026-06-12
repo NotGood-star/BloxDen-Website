@@ -2,29 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>BloxDen Dashboard</title>
 </head>
-<body class="bg-[#0f172a] text-white min-h-screen p-8">
+<body class="bg-[#0f172a] text-white min-h-screen p-6 md:p-12">
 
     <nav class="max-w-6xl mx-auto flex justify-between items-center mb-12">
-        <h1 class="text-2xl font-black italic text-blue-400">BloxDen Dashboard</h1>
-        <a href="/logout" class="bg-red-900/50 hover:bg-red-800 px-4 py-2 rounded-lg text-sm">Logout</a>
+        <h1 class="text-2xl font-black italic text-blue-400">BloxDen</h1>
+        <div class="flex items-center gap-4">
+            <span id="user-info" class="text-sm text-blue-200">Loading...</span>
+            <a href="/logout" class="bg-red-900/30 hover:bg-red-900 text-red-200 px-4 py-2 rounded-xl text-sm transition">Logout</a>
+        </div>
     </nav>
 
     <main class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8">Select a Server to Manage</h2>
+        <h2 class="text-3xl font-bold mb-8">Your Servers</h2>
         
-        <!-- This grid will hold your servers -->
-        <div id="server-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Example Server Card -->
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 hover:border-blue-500 transition">
-                <div class="w-16 h-16 bg-blue-900 rounded-full mb-4"></div>
-                <h3 class="font-bold text-lg">My Community Server</h3>
-                <a href="#" class="mt-4 inline-block text-blue-400 hover:underline">Manage Settings →</a>
-            </div>
+        <div id="server-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p id="loading" class="text-blue-300 italic">Fetching your servers...</p>
         </div>
     </main>
 
+    <script>
+        // Fetch and display servers
+        fetch('/api/servers')
+            .then(res => res.json())
+            .then(servers => {
+                const list = document.getElementById('server-list');
+                const loading = document.getElementById('loading');
+                loading.style.display = 'none';
+
+                if (servers.length === 0) {
+                    list.innerHTML = '<p class="text-blue-200">No servers found where you have Manage Server permissions.</p>';
+                    return;
+                }
+
+                servers.forEach(server => {
+                    const iconUrl = server.icon 
+                        ? `https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png` 
+                        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+                    list.innerHTML += `
+                        <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 hover:border-blue-500 transition group">
+                            <img src="${iconUrl}" alt="${server.name}" class="w-16 h-16 rounded-full mb-4 border-2 border-blue-900">
+                            <h3 class="font-bold text-lg mb-4 truncate">${server.name}</h3>
+                            <a href="/manage/${server.id}" class="text-blue-400 hover:text-white font-medium transition">Manage Settings →</a>
+                        </div>
+                    `;
+                });
+            })
+            .catch(() => {
+                document.getElementById('loading').innerText = 'Failed to load servers. Please try logging in again.';
+            });
+    </script>
 </body>
 </html>
