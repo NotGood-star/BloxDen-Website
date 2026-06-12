@@ -1,7 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloxDen | Dashboard</title>
+    <style>
+        :root {
+            --bg-black: #0f0f0f;
+            --card-black: #1a1a1a;
+            --accent-blue: #3498db;
+            --accent-purple: #9b59b6;
+            --accent-red: #e74c3c;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: var(--card-black);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        h1 { margin-bottom: 10px; color: var(--accent-purple); }
+        .status { color: var(--accent-red); font-weight: bold; margin-bottom: 25px; }
+
+        a {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+        }
+    </style>
+</head>
 <body>
-    <h1>Welcome to BloxDen</h1>
-    <a href="/login">Login with Discord</a>
+
+    <div class="card">
+        <h1>BloxDen</h1>
+        <p class="status">● Status: Online</p>
+        <p>Dashboard ready for configuration. Please login to manage your settings.</p>
+        <br>
+        <a href="/login">Login with Discord</a>
+    </div>
+
 </body>
 </html>
