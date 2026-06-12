@@ -1,70 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloxDen | Dashboard</title>
-    <style>
-        :root {
-            --bg-black: #0f0f0f;
-            --card-black: #1a1a1a;
-            --accent-blue: #3498db;
-            --accent-purple: #9b59b6;
-            --accent-red: #e74c3c;
-            --text-white: #ffffff;
-        }
-
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            background-color: var(--card-black);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid #333;
-            width: 80%;
-            max-width: 400px;
-        }
-
-        h1 { margin-bottom: 10px; color: var(--accent-purple); }
-        .status { color: var(--accent-red); font-weight: bold; margin-bottom: 25px; }
-
-        a {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        a:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>BloxDen | Professional Discord Bot</title>
 </head>
-<body>
+<body class="bg-[#0f0f0f] text-white">
 
-    <div class="card">
-        <h1>BloxDen</h1>
-        <p class="status">● Status: Online</p>
-        <p>Dashboard ready for configuration. Please login to manage your settings.</p>
-        <br>
-        <a href="/login">Login with Discord</a>
-    </div>
+    <header class="text-center py-20 px-6">
+        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
+             alt="Bot Avatar" class="w-32 h-32 mx-auto rounded-full border-4 border-purple-500 shadow-lg mb-6">
+        <h1 class="text-5xl font-extrabold mb-4">BloxDen</h1>
+        <p class="text-gray-400 max-w-lg mx-auto mb-8">The most advanced moderation and utility bot for your Discord server. Secure, fast, and easy to use.</p>
+        
+        <div class="space-x-4">
+            <a href="/login" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full font-bold transition">Login Dashboard</a>
+            <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-bold transition">Invite Bot</a>
+        </div>
+    </header>
+
+    <section class="py-16 px-10 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
+            <h3 class="text-xl font-bold mb-2 text-purple-400">Moderation</h3>
+            <p class="text-gray-400">Keep your server safe with advanced auto-mod, logs, and punishment systems.</p>
+        </div>
+        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
+            <h3 class="text-xl font-bold mb-2 text-purple-400">Economy</h3>
+            <p class="text-gray-400">Engage your members with a fully-featured currency and leveling system.</p>
+        </div>
+        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
+            <h3 class="text-xl font-bold mb-2 text-purple-400">Support 24/7</h3>
+            <p class="text-gray-400">Need help? Join our official support server for instant assistance.</p>
+        </div>
+    </section>
+
+    <footer class="text-center py-10 text-gray-500 text-sm space-x-6">
+        <a href="#" class="hover:text-white">Support Server</a>
+        <a href="/terms" class="hover:text-white">Terms of Service</a>
+        <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+    </footer>
 
 </body>
 </html>
