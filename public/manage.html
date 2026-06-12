@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f172a] text-white p-10">
+    <h2 class="text-3xl font-bold mb-6">Manage Server: <span id="server-name">Loading...</span></h2>
+    
+    <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 max-w-lg">
+        <label class="block mb-2 text-blue-300">Moderation Logs Channel ID</label>
+        <input type="text" id="log-channel" class="bg-slate-900 w-full p-2 rounded mb-4" placeholder="Enter channel ID...">
+        
+        <button onclick="saveSettings()" class="bg-blue-600 px-4 py-2 rounded-lg font-bold">Save Changes</button>
+    </div>
+
+    <script>
+        const guildId = window.location.pathname.split('/')[2];
+        // Now use fetch() to send these settings to your database!
+    </script>
+</body>
+</html>
