@@ -4,65 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
+    <title>BloxDen Bot</title>
 </head>
-<body class="bg-[#0f172a] text-white font-sans">
+<body class="bg-[#0f172a] text-white font-sans p-6">
 
-    <!-- Hero Section (Visible immediately) -->
-    <header class="text-center py-20 px-4">
-        <h1 class="text-5xl font-black mb-4">BloxDen Bot</h1>
-        <p class="text-blue-200 mb-8">Manage, grow, and entertain your community.</p>
+    <header class="text-center py-10">
+        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
+             alt="BloxDen Logo" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 mb-6">
+        <h1 class="text-4xl font-bold mb-4">BloxDen</h1>
+        <p class="text-blue-200 max-w-lg mx-auto mb-8">Manage, grow, and entertain your community with the ultimate all-in-one Discord experience.</p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="/login" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-bold">Login Dashboard</a>
+            <a href="#" class="bg-blue-800 hover:bg-blue-700 px-6 py-2 rounded-lg font-bold">Invite Bot</a>
+            <a href="#" class="bg-slate-800 hover:bg-slate-700 px-6 py-2 rounded-lg font-bold">Support Server</a>
+        </div>
     </header>
 
-    <!-- Features Section (Reveals on scroll) -->
-    <section class="reveal py-16 px-4 max-w-5xl mx-auto" id="features">
-        <h3 class="text-3xl font-bold text-center mb-12">Our Features</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
-                <div class="text-4xl mb-4 text-center">🛡️</div>
-                <h4 class="text-blue-300 font-bold mb-2 text-center">Moderation</h4>
-                <p class="text-sm text-blue-100 hidden details">Automated moderation and logs.</p>
+    <section class="max-w-4xl mx-auto py-10">
+        <h2 class="text-2xl font-bold mb-6">Our Features</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-[#1e293b] p-4 rounded-lg border border-blue-900">
+                <h4 class="font-bold text-blue-300">🛡️ Moderation</h4>
+                <p class="text-sm">Automated moderation, logs, and punishment systems for safety.</p>
             </div>
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
-                <div class="text-4xl mb-4 text-center">💰</div>
-                <h4 class="text-blue-300 font-bold mb-2 text-center">Economy</h4>
-                <p class="text-sm text-blue-100 hidden details">Currency and leveling system.</p>
+            <div class="bg-[#1e293b] p-4 rounded-lg border border-blue-900">
+                <h4 class="font-bold text-blue-300">💰 Economy</h4>
+                <p class="text-sm">Engage members with a fully-featured currency and leveling system.</p>
             </div>
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
-                <div class="text-4xl mb-4 text-center">🎟️</div>
-                <h4 class="text-blue-300 font-bold mb-2 text-center">Tickets</h4>
-                <p class="text-sm text-blue-100 hidden details">Seamless support ticketing.</p>
+            <div class="bg-[#1e293b] p-4 rounded-lg border border-blue-900">
+                <h4 class="font-bold text-blue-300">🎟️ Tickets</h4>
+                <p class="text-sm">Support your community with a seamless ticketing system.</p>
             </div>
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
-                <div class="text-4xl mb-4 text-center">🎁</div>
-                <h4 class="text-blue-300 font-bold mb-2 text-center">Giveaway</h4>
-                <p class="text-sm text-blue-100 hidden details">Host epic giveaways.</p>
+            <div class="bg-[#1e293b] p-4 rounded-lg border border-blue-900">
+                <h4 class="font-bold text-blue-300">🎁 Giveaway</h4>
+                <p class="text-sm">Easily host and manage giveaways to reward your community.</p>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us (Reveals on scroll) -->
-    <section class="reveal text-center py-16 px-4">
-        <h2 class="text-5xl font-black mb-8 text-blue-400">Why to choose us?</h2>
+    <section class="max-w-4xl mx-auto py-10">
+        <h2 class="text-2xl font-bold mb-4 text-blue-400">Why to choose us?</h2>
+        <p class="mb-4">BloxDen Bot is a powerful all-in-one Discord bot designed to help you manage, grow, and entertain your community with ease.</p>
+        <ul class="space-y-2 text-sm text-blue-200">
+            <li>• Easy to use slash commands</li>
+            <li>• Fast and reliable performance</li>
+            <li>• Active development and support</li>
+            <li>• Regular feature updates</li>
+            <li>• Perfect for communities of all sizes</li>
+        </ul>
     </section>
 
-    <script>
-        // Reveal on Scroll
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                    el.classList.add('active');
-                }
-            });
-        });
+    <footer class="text-center text-xs text-blue-500 py-10">
+        <p>© 2026 BloxDen Bot. All rights reserved.</p>
+        <a href="/terms" class="hover:underline">Terms</a> | <a href="/privacy" class="hover:underline">Privacy</a>
+    </footer>
 
-        // Toggle Details
-        function toggleDetails(card) {
-            card.querySelector('.details').classList.toggle('hidden');
-        }
-    </script>
 </body>
 </html>
