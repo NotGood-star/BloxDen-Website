@@ -4,39 +4,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>BloxDen | Professional Discord Bot</title>
 </head>
-<body class="bg-[#0f0f0f] text-white">
+<body class="bg-[#0f0f0f] text-white font-sans">
 
+    <!-- Hero Section -->
     <header class="text-center py-20 px-6">
         <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
-             alt="Bot Avatar" class="w-32 h-32 mx-auto rounded-full border-4 border-purple-500 shadow-lg mb-6">
-        <h1 class="text-5xl font-extrabold mb-4">BloxDen</h1>
-        <p class="text-gray-400 max-w-lg mx-auto mb-8">The most advanced moderation and utility bot for your Discord server. Secure, fast, and easy to use.</p>
+             alt="Bot Avatar" class="w-32 h-32 mx-auto rounded-full border-4 border-purple-500 shadow-lg shadow-purple-500/20 mb-6">
+        
+        <!-- Bold & Cool Header -->
+        <h1 class="text-6xl font-black mb-4 tracking-tight">
+            <span class="text-blue-500">Blox</span><span class="text-purple-500">Den</span>
+        </h1>
+        <p class="text-xl text-gray-400 max-w-lg mx-auto mb-8 font-medium">Manage, grow, and entertain your community with the ultimate all-in-one Discord experience.</p>
         
         <div class="space-x-4">
-            <a href="/login" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full font-bold transition">Login Dashboard</a>
-            <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-bold transition">Invite Bot</a>
+            <a href="/login" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-xl font-bold transition">Login Dashboard</a>
+            <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-bold transition">Invite Bot</a>
         </div>
     </header>
 
-    <section class="py-16 px-10 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
-            <h3 class="text-xl font-bold mb-2 text-purple-400">Moderation</h3>
-            <p class="text-gray-400">Keep your server safe with advanced auto-mod, logs, and punishment systems.</p>
-        </div>
-        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
-            <h3 class="text-xl font-bold mb-2 text-purple-400">Economy</h3>
-            <p class="text-gray-400">Engage your members with a fully-featured currency and leveling system.</p>
-        </div>
-        <div class="bg-[#1a1a1a] p-6 rounded-xl border border-gray-800">
-            <h3 class="text-xl font-bold mb-2 text-purple-400">Support 24/7</h3>
-            <p class="text-gray-400">Need help? Join our official support server for instant assistance.</p>
+    <!-- Why Choose Us Section -->
+    <section class="py-16 px-6 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10 text-white">Why Choose <span class="text-blue-400">BloxDen?</span></h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-blue-500 transition">
+                <h3 class="text-lg font-bold mb-2">⚡ Lightning Fast</h3>
+                <p class="text-gray-400">Built for speed, ensuring your commands execute instantly.</p>
+            </div>
+            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-purple-500 transition">
+                <h3 class="text-lg font-bold mb-2">🔒 Secure & Protected</h3>
+                <p class="text-gray-400">Advanced security tools to keep your community safe from threats.</p>
+            </div>
         </div>
     </section>
 
-    <footer class="text-center py-10 text-gray-500 text-sm space-x-6">
-        <a href="#" class="hover:text-white">Support Server</a>
-        <a href="/terms" class="hover:text-white">Terms of Service</a>
-        <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+    <!-- Features Section -->
+    <section class="py-10 px-6 max-w-4xl mx-auto bg-[#141414] rounded-3xl mb-20">
+        <h2 class="text-2xl font-bold text-center mb-8">All-In-One Toolkit</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="p-4 bg-[#1a1a1a] rounded-xl text-sm font-semibold">Moderation</div>
+            <div class="p-4 bg-[#1a1a1a] rounded-xl text-sm font-semibold">Economy</div>
+            <div class="p-4 bg-[#1a1a1a] rounded-xl text-sm font-semibold">Tickets</div>
+            <div class="p-4 bg-[#1a1a1a] rounded-xl text-sm font-semibold">Giveaways</div>
+        </div>
+    </section>
+
+    <footer class="text-center py-10 text-gray-500 border-t border-gray-900">
+        <p class="mb-4">© 2026 BloxDen Bot. All rights reserved.</p>
+        <div class="space-x-4">
+            <a href="/terms" class="hover:text-white">Terms</a>
+            <a href="/privacy" class="hover:text-white">Privacy</a>
+        </div>
     </footer>
 
 </body>
