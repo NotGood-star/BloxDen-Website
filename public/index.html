@@ -6,43 +6,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>BloxDen | Discord Bot</title>
 </head>
-<body class="bg-[#0f0f0f] text-white font-sans selection:bg-purple-500">
+<body class="bg-[#0f0f0f] text-white font-sans">
+
+    <!-- Top Navigation -->
+    <nav class="flex justify-between items-center py-6 px-8 max-w-5xl mx-auto">
+        <h1 class="text-2xl font-black italic"><span class="text-blue-500">Blox</span><span class="text-purple-500">Den</span></h1>
+        <div class="text-sm text-gray-400">
+            <a href="/terms" class="hover:text-white">Terms</a> | <a href="/privacy" class="hover:text-white">Privacy</a>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <header class="text-center py-16 px-4">
-        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
-             alt="Bot Avatar" class="w-28 h-28 mx-auto rounded-full border-4 border-purple-500 shadow-2xl mb-6">
-        
-        <h1 class="text-5xl md:text-6xl font-black mb-4">
-            <span class="text-blue-500">Blox</span><span class="text-purple-500">Den</span>
-        </h1>
-        <p class="text-gray-400 max-w-md mx-auto mb-8">Manage, grow, and entertain your community with the ultimate all-in-one Discord experience.</p>
-        
+    <header class="text-center py-10 px-4">
+        <p class="text-lg text-gray-300 max-w-lg mx-auto mb-8">Manage, grow, and entertain your community with the ultimate all-in-one Discord experience.</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="/login" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-xl font-bold transition">Login Dashboard</a>
             <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-bold transition">Invite Bot</a>
+            <a href="#" class="bg-gray-800 hover:bg-gray-700 px-8 py-3 rounded-xl font-bold transition">Support Server</a>
         </div>
     </header>
 
-    <!-- Why Choose Us -->
+    <!-- Features Section -->
     <section class="py-10 px-4 max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Why Choose <span class="text-blue-400">BloxDen?</span></h2>
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all">
-                <h3 class="text-xl font-bold mb-2">⚡ Lightning Fast</h3>
-                <p class="text-gray-400">Built for speed, ensuring your commands execute instantly without lag.</p>
-            </div>
-            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-purple-500 transition-all">
-                <h3 class="text-xl font-bold mb-2">🔒 Secure & Protected</h3>
-                <p class="text-gray-400">Advanced security tools to keep your community safe from threats 24/7.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Detailed Feature Cards -->
-    <section class="py-10 px-4 max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Our Features</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h2 class="text-3xl font-bold mb-8 text-center">Our Features</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-[#141414] p-6 rounded-2xl border border-gray-900">
                 <h4 class="text-blue-400 font-bold mb-2">🛡️ Moderation</h4>
                 <p class="text-sm text-gray-400">Automated moderation, logs, and punishment systems for safety.</p>
@@ -55,14 +42,30 @@
                 <h4 class="text-blue-400 font-bold mb-2">🎟️ Tickets</h4>
                 <p class="text-sm text-gray-400">Support your community with a seamless ticketing system.</p>
             </div>
+            <div class="bg-[#141414] p-6 rounded-2xl border border-gray-900">
+                <h4 class="text-purple-400 font-bold mb-2">🎁 Giveaway</h4>
+                <p class="text-sm text-gray-400">Easily host and manage giveaways to reward your community.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Why Choose Us -->
+    <section class="py-10 px-4 max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10">Why Choose BloxDen?</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all">
+                <h3 class="text-xl font-bold mb-2">⚡ Lightning Fast</h3>
+                <p class="text-gray-400">Built for speed, ensuring your commands execute instantly without lag.</p>
+            </div>
+            <div class="bg-[#1a1a1a] p-6 rounded-2xl border border-gray-800 hover:border-purple-500 transition-all">
+                <h3 class="text-xl font-bold mb-2">🔒 Secure & Protected</h3>
+                <p class="text-gray-400">Advanced security tools to keep your community safe from threats 24/7.</p>
+            </div>
+        </div>
+    </section>
+
     <footer class="text-center py-10 text-gray-600 text-sm">
-        <p class="mb-2">© 2026 BloxDen Bot. All rights reserved.</p>
-        <a href="/terms" class="hover:text-white mx-2">Terms</a> | 
-        <a href="/privacy" class="hover:text-white mx-2">Privacy</a>
+        <p>© 2026 BloxDen Bot. All rights reserved.</p>
     </footer>
 
 </body>
