@@ -30,7 +30,7 @@ passport.use(new DiscordStrategy({
     return done(null, profile);
 }));
 
-// --- Middleware & Static Files ---
+// --- Middleware ---
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Routes ---
@@ -49,12 +49,24 @@ app.get('/logout', (req, res) => {
     req.logout(() => res.redirect('/'));
 });
 
-// Dashboard & API
+// Dashboard Routes
 app.get('/dashboard', (req, res) => {
     if (!req.isAuthenticated()) return res.redirect('/login');
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
+// Manage Specific Server
+app.get('/manage/:guildId', (req, res) => {
+    if (!req.isAuthenticated()) return res.redirect('/login');
+    
+    // Verify user is in the guild
+    const guild = req.user.guilds.find(g => g.id === req.params.guildId);
+    if (!guild) return res.status(403).send('You do not have access to this server.');
+    
+    res.sendFile(path.join(__dirname, 'public', 'manage.html'));
+});
+
+// API Routes
 app.get('/api/servers', (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send('Unauthorized');
     
