@@ -4,85 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>BloxDen | Peacefully Powerful</title>
     <style>
-        .details { transition: max-height 0.3s ease-out; overflow: hidden; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="bg-[#0f172a] text-white font-sans">
 
-    <!-- Top Navigation -->
-    <nav class="flex justify-between items-center py-6 px-8 max-w-5xl mx-auto">
-        <h1 class="text-2xl font-black italic"><span class="text-blue-400">Blox</span><span class="text-white">Den</span></h1>
-        <div class="text-sm text-blue-300">
-            <a href="/terms" class="hover:text-white">Terms</a> | <a href="/privacy" class="hover:text-white">Privacy</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="text-center py-16 px-4">
-        <img src="https://cdn.discordapp.com/avatars/1507972003481784421/1c5678b9835544ee472941d2ea463328.png?size=4096" 
-             alt="Bot Avatar" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 shadow-lg shadow-blue-500/20 mb-6">
+    <!-- Hero Section (Visible immediately) -->
+    <header class="text-center py-20 px-4">
         <h1 class="text-5xl font-black mb-4">BloxDen Bot</h1>
-        <p class="text-lg text-blue-200 max-w-lg mx-auto mb-8">Manage, grow, and entertain your community with the ultimate all-in-one Discord experience.</p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="/login" class="bg-blue-600 hover:bg-blue-500 px-8 py-3 rounded-xl font-bold transition">Login Dashboard</a>
-            <a href="#" class="bg-blue-800 hover:bg-blue-700 px-8 py-3 rounded-xl font-bold transition">Invite Bot</a>
-            <a href="#" class="bg-slate-800 hover:bg-slate-700 px-8 py-3 rounded-xl font-bold transition">Support Server</a>
-        </div>
+        <p class="text-blue-200 mb-8">Manage, grow, and entertain your community.</p>
     </header>
 
-    <!-- Features Section -->
-    <section class="py-16 px-4 max-w-5xl mx-auto">
+    <!-- Features Section (Reveals on scroll) -->
+    <section class="reveal py-16 px-4 max-w-5xl mx-auto" id="features">
         <h3 class="text-3xl font-bold text-center mb-12">Our Features</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <!-- Moderation -->
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer hover:border-blue-400 transition" onclick="toggleDetails(this)">
-                <img src="https://emoji.gg/assets/emoji/12478-moderatorroleicon3.png" alt="Moderation" class="w-12 h-12 mb-4 mx-auto">
+            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
+                <div class="text-4xl mb-4 text-center">🛡️</div>
                 <h4 class="text-blue-300 font-bold mb-2 text-center">Moderation</h4>
-                <p class="text-sm text-blue-100 hidden details">Automated moderation, logs, and punishment systems for safety.</p>
+                <p class="text-sm text-blue-100 hidden details">Automated moderation and logs.</p>
             </div>
-
-            <!-- Economy -->
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer hover:border-blue-400 transition" onclick="toggleDetails(this)">
+            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
                 <div class="text-4xl mb-4 text-center">💰</div>
                 <h4 class="text-blue-300 font-bold mb-2 text-center">Economy</h4>
-                <p class="text-sm text-blue-100 hidden details">Engage members with a fully-featured currency and leveling system.</p>
+                <p class="text-sm text-blue-100 hidden details">Currency and leveling system.</p>
             </div>
-
-            <!-- Tickets -->
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer hover:border-blue-400 transition" onclick="toggleDetails(this)">
-                <img src="https://emoji.gg/assets/emoji/437007-ticket.png" alt="Tickets" class="w-12 h-12 mb-4 mx-auto">
+            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
+                <div class="text-4xl mb-4 text-center">🎟️</div>
                 <h4 class="text-blue-300 font-bold mb-2 text-center">Tickets</h4>
-                <p class="text-sm text-blue-100 hidden details">Support your community with a seamless ticketing system.</p>
+                <p class="text-sm text-blue-100 hidden details">Seamless support ticketing.</p>
             </div>
-
-            <!-- Giveaway -->
-            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer hover:border-blue-400 transition" onclick="toggleDetails(this)">
-                <img src="https://emoji.gg/assets/emoji/3899-gift.png" alt="Giveaway" class="w-12 h-12 mb-4 mx-auto">
+            <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 cursor-pointer" onclick="toggleDetails(this)">
+                <div class="text-4xl mb-4 text-center">🎁</div>
                 <h4 class="text-blue-300 font-bold mb-2 text-center">Giveaway</h4>
-                <p class="text-sm text-blue-100 hidden details">Easily host and manage giveaways to reward your community.</p>
+                <p class="text-sm text-blue-100 hidden details">Host epic giveaways.</p>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="text-center py-16 px-4">
-        <h2 class="text-5xl font-black mb-8">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500">Why to choose us?</span>
-        </h2>
-        <p class="text-blue-200 max-w-2xl mx-auto italic">"BloxDen Bot is a powerful all-in-one Discord bot designed to help you manage, grow, and entertain your community with ease."</p>
+    <!-- Why Choose Us (Reveals on scroll) -->
+    <section class="reveal text-center py-16 px-4">
+        <h2 class="text-5xl font-black mb-8 text-blue-400">Why to choose us?</h2>
     </section>
 
-    <footer class="text-center py-10 text-blue-400 text-sm">
-        <p>© 2026 BloxDen Bot. All rights reserved.</p>
-    </footer>
-
     <script>
+        // Reveal on Scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        });
+
+        // Toggle Details
         function toggleDetails(card) {
-            const details = card.querySelector('.details');
-            details.classList.toggle('hidden');
+            card.querySelector('.details').classList.toggle('hidden');
         }
     </script>
 </body>
