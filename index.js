@@ -6,29 +6,30 @@ const app = express();
 
 const port = process.env.PORT || 10000;
 
+// Middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'a-very-secret-key',
+    secret: process.env.SESSION_SECRET || 'super-secret-key',
     resave: false,
     saveUninitialized: false
 }));
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Login Route
+// --- Navigation Routes ---
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/terms', (req, res) => res.send('<h1>Terms of Service</h1><p>BloxDen is provided "as-is" for Discord server management.</p>'));
+app.get('/privacy', (req, res) => res.send('<h1>Privacy Policy</h1><p>We collect only necessary Discord account data to facilitate bot configuration.</p>'));
+
+// --- Authentication Routes ---
 app.get('/login', (req, res) => {
     const clientId = '1507972003481784421';
     const redirectUri = 'https://bloxden-website.onrender.com/api/auth/callback/discord';
     const scope = 'identify guilds';
-    
     const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`;
-    
     res.redirect(authUrl);
 });
 
-// Callback Route
 app.get('/api/auth/callback/discord', async (req, res) => {
     const { code } = req.query;
-
     if (!code) return res.status(400).send('No code provided.');
 
     try {
@@ -45,14 +46,16 @@ app.get('/api/auth/callback/discord', async (req, res) => {
         req.session.token = tokenResponse.data.access_token;
         res.redirect('/dashboard');
     } catch (error) {
-        console.error('OAuth2 Error:', error.response ? error.response.data : error.message);
-        res.status(500).send('Authentication failed. Check logs.');
+        console.error('OAuth2 Error:', error.response?.data || error.message);
+        res.status(500).send('Authentication failed.');
     }
 });
 
+// --- Dashboard Routes ---
 app.get('/dashboard', (req, res) => {
     if (!req.session.token) return res.redirect('/login');
-    res.send('<h1>Dashboard</h1><p>Login successful!</p><a href="/logout">Logout</a>');
+    // We will build this file next
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
 app.get('/logout', (req, res) => {
