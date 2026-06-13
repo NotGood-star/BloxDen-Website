@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Server | BloxDen</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#0f172a] text-white p-10">
+<body class="bg-[#0f172a] text-white min-h-screen p-6 md:p-10">
+    
+    <nav class="mb-8">
+        <a href="/dashboard" class="text-blue-400 hover:text-blue-300 transition flex items-center">
+            ← Back to Dashboard
+        </a>
+    </nav>
+
     <h2 class="text-3xl font-bold mb-6">Manage Server Settings</h2>
     
-    <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 max-w-lg">
-        <label class="block mb-2 text-blue-300">Select Log Channel</label>
-        <select id="channel-select" class="bg-slate-900 w-full p-2 rounded mb-4 text-white border border-blue-800">
-            <option>Loading channels...</option>
-        </select>
+    <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 max-w-lg shadow-xl">
+        <div class="mb-6">
+            <label class="block mb-2 text-blue-300 font-semibold">Select Log Channel</label>
+            <p class="text-xs text-gray-400 mb-4">Choose where the bot will send automatic event logs.</p>
+            
+            <select id="channel-select" class="bg-slate-900 w-full p-3 rounded-lg border border-blue-800 focus:ring-2 focus:ring-blue-500 outline-none text-white transition">
+                <option>Loading channels...</option>
+            </select>
+        </div>
         
-        <button onclick="saveSettings()" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-bold transition">Save Changes</button>
+        <button id="save-btn" onclick="saveSettings()" class="bg-blue-600 hover:bg-blue-500 w-full px-6 py-3 rounded-lg font-bold transition shadow-lg transform active:scale-95">
+            Save Changes
+        </button>
     </div>
 
     <script>
         const guildId = window.location.pathname.split('/')[2];
 
+        // Fetch channels on load
         fetch(`/api/channels/${guildId}`)
             .then(res => res.json())
             .then(channels => {
                 const select = document.getElementById('channel-select');
+                if (channels.length === 0) {
+                    select.innerHTML = '<option>No channels found</option>';
+                    return;
+                }
                 select.innerHTML = channels.map(c => `<option value="${c.id}">#${c.name}</option>`).join('');
+            })
+            .catch(() => {
+                document.getElementById('channel-select').innerHTML = '<option>Error loading channels</option>';
             });
 
+        // Save logic with feedback
         function saveSettings() {
+            const btn = document.getElementById('save-btn');
             const channelId = document.getElementById('channel-select').value;
+            
+            btn.innerText = 'Saving...';
+            btn.disabled = true;
+
             fetch(`/api/settings/${guildId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ logChannel: channelId })
-            }).then(() => alert('Settings Saved Successfully!'));
+            })
+            .then(res => res.json())
+            .then(() => {
+                alert('Settings Saved Successfully!');
+                btn.innerText = 'Save Changes';
+                btn.disabled = false;
+            })
+            .catch(() => {
+                alert('Failed to save settings.');
+                btn.innerText = 'Save Changes';
+                btn.disabled = false;
+            });
         }
     </script>
 </body>
