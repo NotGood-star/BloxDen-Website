@@ -4,18 +4,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0f172a] text-white p-10">
-    <h2 class="text-3xl font-bold mb-6">Manage Server: <span id="server-name">Loading...</span></h2>
+    <h2 class="text-3xl font-bold mb-6">Manage Server Settings</h2>
     
     <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 max-w-lg">
-        <label class="block mb-2 text-blue-300">Moderation Logs Channel ID</label>
-        <input type="text" id="log-channel" class="bg-slate-900 w-full p-2 rounded mb-4" placeholder="Enter channel ID...">
+        <label class="block mb-2 text-blue-300">Select Log Channel</label>
+        <select id="channel-select" class="bg-slate-900 w-full p-2 rounded mb-4 text-white border border-blue-800">
+            <option>Loading channels...</option>
+        </select>
         
-        <button onclick="saveSettings()" class="bg-blue-600 px-4 py-2 rounded-lg font-bold">Save Changes</button>
+        <button onclick="saveSettings()" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-bold transition">Save Changes</button>
     </div>
 
     <script>
         const guildId = window.location.pathname.split('/')[2];
-        // Now use fetch() to send these settings to your database!
+
+        fetch(`/api/channels/${guildId}`)
+            .then(res => res.json())
+            .then(channels => {
+                const select = document.getElementById('channel-select');
+                select.innerHTML = channels.map(c => `<option value="${c.id}">#${c.name}</option>`).join('');
+            });
+
+        function saveSettings() {
+            const channelId = document.getElementById('channel-select').value;
+            fetch(`/api/settings/${guildId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ logChannel: channelId })
+            }).then(() => alert('Settings Saved Successfully!'));
+        }
     </script>
 </body>
 </html>
