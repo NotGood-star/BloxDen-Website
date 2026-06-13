@@ -11,10 +11,11 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI);
+// --- 1. Database & Session ---
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('✅ MongoDB Connected'))
+    .catch(err => console.error('❌ DB Error:', err));
 
-// Session setup with MongoDB persistence
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -28,7 +29,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Passport Strategy
+// --- 2. Passport Config ---
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(new DiscordStrategy({
@@ -38,15 +39,26 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
-// Routes
+// --- 3. Authentication Routes ---
 app.get('/login', passport.authenticate('discord'));
 app.get('/callback', passport.authenticate('discord', { failureRedirect: '/' }), (req, res) => res.redirect('/dashboard'));
-app.get('/dashboard', (req, res) => req.isAuthenticated() ? res.sendFile(path.join(__dirname, 'public', 'dashboard.html')) : res.redirect('/login'));
+app.get('/logout', (req, res) => {
+    req.logout(() => res.redirect('/'));
+});
+
+// --- 4. API Routes ---
+app.get('/api/user', (req, res) => {
+    if (!req.isAuthenticated()) return res.status(401).send();
+    res.json(req.user);
+});
 
 app.get('/api/servers', (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
-    // Filter only servers where user has Administrator (0x8)
+    // Filter by Administrator permission (0x8)
     res.json(req.user.guilds.filter(g => (g.permissions & 0x8) === 0x8));
 });
+
+// --- 5. Page Routes ---
+app.get('/dashboard', (req, res) => req.isAuthenticated() ? res.sendFile(path.join(__dirname, 'public', 'dashboard.html')) : res.redirect('/login'));
 
 app.listen(PORT, () => console.log(`🚀 Web Dashboard running on ${PORT}`));
