@@ -16,10 +16,12 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ DB Error:', err));
 
-// Schema for storing guild settings
+// Expanded Schema to handle multiple settings
 const Guild = mongoose.model('Guild', new mongoose.Schema({ 
     guildId: { type: String, unique: true }, 
-    logChannel: String 
+    logChannel: String,
+    welcomeMessage: { type: String, default: "Welcome {user} to the server!" },
+    goodbyeMessage: { type: String, default: "{user} has left." }
 }));
 
 app.use(session({
@@ -61,7 +63,7 @@ app.get('/api/servers', (req, res) => {
     res.json(req.user.guilds.filter(g => (g.permissions & 0x8) === 0x8));
 });
 
-// Fetch channels for dropdown
+// Fetch channels
 app.get('/api/channels/:guildId', async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
     try {
@@ -69,13 +71,25 @@ app.get('/api/channels/:guildId', async (req, res) => {
             headers: { Authorization: `Bot ${process.env.TOKEN}` }
         });
         res.json(response.data.filter(c => c.type === 0).map(c => ({ name: c.name, id: c.id })));
-    } catch (e) { res.status(500).send('Error fetching channels'); }
+    } catch (e) { res.status(500).send('Error'); }
 });
 
-// Save settings to DB
+// Get current settings
+app.get('/api/settings/:guildId', async (req, res) => {
+    if (!req.isAuthenticated()) return res.status(401).send();
+    const settings = await Guild.findOne({ guildId: req.params.guildId });
+    res.json(settings || {});
+});
+
+// Save all settings
 app.post('/api/settings/:guildId', async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
-    await Guild.findOneAndUpdate({ guildId: req.params.guildId }, { logChannel: req.body.logChannel }, { upsert: true });
+    const { logChannel, welcomeMessage, goodbyeMessage } = req.body;
+    await Guild.findOneAndUpdate(
+        { guildId: req.params.guildId }, 
+        { logChannel, welcomeMessage, goodbyeMessage }, 
+        { upsert: true, new: true }
+    );
     res.json({ success: true });
 });
 
