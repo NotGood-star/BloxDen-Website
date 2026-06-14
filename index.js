@@ -16,12 +16,13 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ DB Error:', err));
 
-// Expanded Schema to handle multiple settings
+// Updated Schema with Prefix
 const Guild = mongoose.model('Guild', new mongoose.Schema({ 
     guildId: { type: String, unique: true }, 
     logChannel: String,
     welcomeMessage: { type: String, default: "Welcome {user} to the server!" },
-    goodbyeMessage: { type: String, default: "{user} has left." }
+    goodbyeMessage: { type: String, default: "{user} has left." },
+    prefix: { type: String, default: "!" } // New Field
 }));
 
 app.use(session({
@@ -63,7 +64,6 @@ app.get('/api/servers', (req, res) => {
     res.json(req.user.guilds.filter(g => (g.permissions & 0x8) === 0x8));
 });
 
-// Fetch channels
 app.get('/api/channels/:guildId', async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
     try {
@@ -74,20 +74,19 @@ app.get('/api/channels/:guildId', async (req, res) => {
     } catch (e) { res.status(500).send('Error'); }
 });
 
-// Get current settings
 app.get('/api/settings/:guildId', async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
     const settings = await Guild.findOne({ guildId: req.params.guildId });
     res.json(settings || {});
 });
 
-// Save all settings
+// Updated POST route to accept prefix
 app.post('/api/settings/:guildId', async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
-    const { logChannel, welcomeMessage, goodbyeMessage } = req.body;
+    const { logChannel, welcomeMessage, goodbyeMessage, prefix } = req.body;
     await Guild.findOneAndUpdate(
         { guildId: req.params.guildId }, 
-        { logChannel, welcomeMessage, goodbyeMessage }, 
+        { logChannel, welcomeMessage, goodbyeMessage, prefix }, 
         { upsert: true, new: true }
     );
     res.json({ success: true });
