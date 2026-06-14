@@ -1,12 +1,15 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
-const mongoose = require('mongoose');
+const { Guild } = require('./index.js'); // Import from index.js
 
 const client = new Client({ 
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] 
+    intents: [
+        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.GuildMembers, 
+        GatewayIntentBits.GuildMessages, 
+        GatewayIntentBits.MessageContent 
+    ] 
 });
-
-const Guild = mongoose.model('Guild'); // Uses the model defined in index.js
 
 client.once('ready', () => console.log(`✅ Bot is online as ${client.user.tag}`));
 
@@ -21,8 +24,7 @@ client.on('messageCreate', async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
     
-    if (command === 'ping') message.reply('Pong!');
-    if (command === 'help') message.reply(`My prefix is ${prefix}. Commands: ping, help.`);
+    if (command === 'ping') message.reply(`Pong! My prefix is ${prefix}`);
 });
 
 client.login(process.env.TOKEN);
