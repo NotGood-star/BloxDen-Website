@@ -11,18 +11,17 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// --- 1. Database & Session ---
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ DB Error:', err));
 
-// Updated Schema with Prefix
+// Global Schema
 const Guild = mongoose.model('Guild', new mongoose.Schema({ 
     guildId: { type: String, unique: true }, 
     logChannel: String,
     welcomeMessage: { type: String, default: "Welcome {user} to the server!" },
     goodbyeMessage: { type: String, default: "{user} has left." },
-    prefix: { type: String, default: "!" } // New Field
+    prefix: { type: String, default: "!" }
 }));
 
 app.use(session({
@@ -38,7 +37,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- 2. Passport Config ---
+// Auth & API Routes
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(new DiscordStrategy({
@@ -48,52 +47,26 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
-// --- 3. Authentication Routes ---
 app.get('/login', passport.authenticate('discord'));
 app.get('/callback', passport.authenticate('discord', { failureRedirect: '/' }), (req, res) => res.redirect('/dashboard'));
-app.get('/logout', (req, res) => { req.logout(() => res.redirect('/')); });
-
-// --- 4. API Routes ---
-app.get('/api/user', (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).send();
-    res.json(req.user);
-});
-
-app.get('/api/servers', (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).send();
-    res.json(req.user.guilds.filter(g => (g.permissions & 0x8) === 0x8));
-});
-
 app.get('/api/channels/:guildId', async (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).send();
     try {
-        const response = await axios.get(`https://discord.com/api/v10/guilds/${req.params.guildId}/channels`, {
-            headers: { Authorization: `Bot ${process.env.TOKEN}` }
-        });
+        const response = await axios.get(`https://discord.com/api/v10/guilds/${req.params.guildId}/channels`, { headers: { Authorization: `Bot ${process.env.TOKEN}` } });
         res.json(response.data.filter(c => c.type === 0).map(c => ({ name: c.name, id: c.id })));
-    } catch (e) { res.status(500).send('Error'); }
+    } catch (e) { res.status(500).send(); }
 });
 
 app.get('/api/settings/:guildId', async (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).send();
     const settings = await Guild.findOne({ guildId: req.params.guildId });
     res.json(settings || {});
 });
 
-// Updated POST route to accept prefix
 app.post('/api/settings/:guildId', async (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).send();
-    const { logChannel, welcomeMessage, goodbyeMessage, prefix } = req.body;
-    await Guild.findOneAndUpdate(
-        { guildId: req.params.guildId }, 
-        { logChannel, welcomeMessage, goodbyeMessage, prefix }, 
-        { upsert: true, new: true }
-    );
+    await Guild.findOneAndUpdate({ guildId: req.params.guildId }, req.body, { upsert: true, new: true });
     res.json({ success: true });
 });
 
-// --- 5. Page Routes ---
-app.get('/dashboard', (req, res) => req.isAuthenticated() ? res.sendFile(path.join(__dirname, 'public', 'dashboard.html')) : res.redirect('/login'));
-app.get('/manage/:guildId', (req, res) => req.isAuthenticated() ? res.sendFile(path.join(__dirname, 'public', 'manage.html')) : res.redirect('/login'));
-
 app.listen(PORT, () => console.log(`🚀 Web Dashboard running on ${PORT}`));
+
+// START BOT
+require('./bot.js');
