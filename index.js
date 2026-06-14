@@ -15,14 +15,17 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ DB Error:', err));
 
-// Global Schema
-const Guild = mongoose.model('Guild', new mongoose.Schema({ 
+// Define Schema and Model
+const guildSchema = new mongoose.Schema({ 
     guildId: { type: String, unique: true }, 
     logChannel: String,
     welcomeMessage: { type: String, default: "Welcome {user} to the server!" },
     goodbyeMessage: { type: String, default: "{user} has left." },
     prefix: { type: String, default: "!" }
-}));
+});
+
+const Guild = mongoose.model('Guild', guildSchema);
+module.exports = { Guild }; // Exporting the model
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -37,16 +40,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Auth & API Routes
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
-passport.use(new DiscordStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'https://bloxden-website.onrender.com/callback',
-    scope: ['identify', 'guilds']
-}, (accessToken, refreshToken, profile, done) => done(null, profile)));
-
+// Routes
 app.get('/login', passport.authenticate('discord'));
 app.get('/callback', passport.authenticate('discord', { failureRedirect: '/' }), (req, res) => res.redirect('/dashboard'));
 app.get('/api/channels/:guildId', async (req, res) => {
@@ -68,5 +62,5 @@ app.post('/api/settings/:guildId', async (req, res) => {
 
 app.listen(PORT, () => console.log(`🚀 Web Dashboard running on ${PORT}`));
 
-// START BOT
+// Start Bot
 require('./bot.js');
