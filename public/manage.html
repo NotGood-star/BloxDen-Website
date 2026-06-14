@@ -16,19 +16,23 @@
     
     <div class="bg-[#1e293b] p-6 rounded-2xl border border-blue-900 max-w-lg shadow-xl space-y-6">
         <div>
+            <label class="block mb-2 text-blue-300 font-semibold">Command Prefix</label>
+            <input type="text" id="prefix-input" maxlength="3" placeholder="!" 
+                   class="w-full bg-slate-900 p-3 rounded-lg border border-blue-800 text-white">
+        </div>
+
+        <div>
             <label class="block mb-2 text-blue-300 font-semibold">Select Log Channel</label>
             <select id="channel-select" class="bg-slate-900 w-full p-3 rounded-lg border border-blue-800 text-white"></select>
         </div>
 
         <div>
             <label class="block mb-2 text-blue-300 font-semibold">Welcome Message</label>
-            <p class="text-xs text-gray-400 mb-2">Use {user} to mention the new member.</p>
             <textarea id="welcome-msg" class="w-full bg-slate-900 p-3 rounded-lg border border-blue-800 text-white h-24"></textarea>
         </div>
 
         <div>
             <label class="block mb-2 text-blue-300 font-semibold">Goodbye Message</label>
-            <p class="text-xs text-gray-400 mb-2">Use {user} to show their username.</p>
             <textarea id="goodbye-msg" class="w-full bg-slate-900 p-3 rounded-lg border border-blue-800 text-white h-24"></textarea>
         </div>
         
@@ -40,24 +44,23 @@
     <script>
         const guildId = window.location.pathname.split('/')[2];
 
-        // 1. Load Channels AND Current Settings on page load
         async function loadData() {
-            // Load channels
-            const chanRes = await fetch(`/api/channels/${guildId}`);
+            const [chanRes, setRes] = await Promise.all([
+                fetch(`/api/channels/${guildId}`),
+                fetch(`/api/settings/${guildId}`)
+            ]);
             const channels = await chanRes.json();
+            const settings = await setRes.json();
+
             const select = document.getElementById('channel-select');
             select.innerHTML = channels.map(c => `<option value="${c.id}">#${c.name}</option>`).join('');
-
-            // Load saved settings
-            const setRes = await fetch(`/api/settings/${guildId}`);
-            const settings = await setRes.json();
             
             if (settings.logChannel) select.value = settings.logChannel;
-            if (settings.welcomeMessage) document.getElementById('welcome-msg').value = settings.welcomeMessage;
-            if (settings.goodbyeMessage) document.getElementById('goodbye-msg').value = settings.goodbyeMessage;
+            document.getElementById('prefix-input').value = settings.prefix || '!';
+            document.getElementById('welcome-msg').value = settings.welcomeMessage || 'Welcome {user} to the server!';
+            document.getElementById('goodbye-msg').value = settings.goodbyeMessage || '{user} has left.';
         }
 
-        // 2. Save all settings
         async function saveSettings() {
             const btn = document.getElementById('save-btn');
             btn.innerText = 'Saving...';
@@ -67,15 +70,14 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    prefix: document.getElementById('prefix-input').value,
                     logChannel: document.getElementById('channel-select').value,
                     welcomeMessage: document.getElementById('welcome-msg').value,
                     goodbyeMessage: document.getElementById('goodbye-msg').value
                 })
             });
 
-            if (response.ok) {
-                alert('Settings Saved Successfully!');
-            }
+            if (response.ok) alert('Settings Saved!');
             btn.innerText = 'Save All Settings';
             btn.disabled = false;
         }
