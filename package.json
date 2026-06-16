@@ -1,21 +1,13 @@
 {
   "name": "bloxden-website",
   "version": "1.0.0",
-  "description": "BloxDen Bot and Dashboard",
+  "description": "A cheerful landing page for BloxDen",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "axios": "^1.7.9",
-    "connect-mongo": "^5.1.0",
-    "discord.js": "^14.17.3",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "mongoose": "^8.9.3",
-    "passport": "^0.7.0",
-    "passport-discord": "^0.1.4"
+    "express": "^4.21.0"
   },
   "engines": {
     "node": "24.x"
